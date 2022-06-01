@@ -36,7 +36,7 @@
     */
 
     echo "<h1>Aydın Adnan Menderes Üniversitesi</h1>";
-    echo "<h3>Aydın Adnan Menderes Üniversitesi</h3>";
+    echo '<h3>Aydın Adnan Menderes Üniversitesi</h3>';
     echo "Bilgisayar Programcılığı " . "Web Teknolojileri" . "<br>";
     echo "Bilgisayar Programcılığı" . "<br>" .  "Web Teknolojileri";
 
@@ -48,8 +48,8 @@
     echo "<ol> 
             <li> Değişken İsimleri $ ile başlar. </li>
             <li> Değişken isimleri sayısal bir ifade ile başlayamaz. </li>
-            <li> Değişken issimlerinde boşluk kullanılamaz. İki kelime varsa birincisi_sinif
-            birincisinif birinci-sinif örneklerindeki kullanımlar önerilir. </li>
+            <li> Değişken issimlerinde boşluk kullanılamaz. İki kelime varsa birinci_sinif,
+            birincisinif, birinci-sinif örneklerindeki kullanımlar önerilir. </li>
             <li> Değişken ve dosya isimlerinde türkçe karekter kullnılmamalıdır. </li>
             <li> Değişken isimlerinde büyük-küçük harf kullanımına duyarlıdır. \$sayi != \$Sayi </li>
             <li> Değiişken içerisinde eğer metinsel bir ifade varsa çift tırnak (\") veya tek tırnak (') kullanılır. </li>
