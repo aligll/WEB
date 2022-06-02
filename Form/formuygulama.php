@@ -1,3 +1,6 @@
+<?php 
+include("veri.php"); 
+?>
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -14,16 +17,16 @@
         <div class="col-lg-8">
             <div class="card mt-3 bg-light">
                 <div class="card-body">
-                    <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" method="post" >
+                    <form action="" method="post">
                         <div class="form-group">
                             <label> Adınız Soyadınız </label>
-                            <input type="text" class="form-control" name="adınızSoyadınız">
+                            <input type="text" class="form-control" name="adinizsoyadiniz" required="required">
                             <small class="form-text text-muted"> * Bu Alan Zorunludur. </small>
                         </div>
                         <br>
                         <div class="form-group">
                             <label> Email </label>
-                            <input type="email" class="form-control" name="email">
+                            <input type="email" class="form-control" name="email" required="required">
                             <small class="form-text text-muted"> * Bu Alan Zorunludur. </small>
                         </div>
                         <br>
@@ -40,10 +43,10 @@
                             <input class="form-check-input" type="radio"  name="gender" value="Erkek">
                             <label class="form-check-label" > Erkek </label> 
                         </div>
-                        <div class="form-check form-check-inline">
+                        <!-- <div class="form-check form-check-inline">
                             <input class="form-check-input" type="radio"  name="gender" value="Diğer">
                             <label class="form-check-label" > Diğer </label>
-                        </div>
+                        </div> -->
                         <br>
                         <br>
                         <div class="form-group">
@@ -57,7 +60,8 @@
 					</div>
                     <br>
                     <div class="form-group">
-							<textarea name="not" class="form-control" rows="5" cols="70"></textarea>
+                            <label> Notunuz </label>
+                            <input type="text" class="form-control" name="not">
 						</div>
                         <br>
                         <div class="form-group">
@@ -66,8 +70,13 @@
 						</div>
                         <br>
                     </form>
+
+                  
+
+                                    
                 <?php
-                if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+                /* if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $adınızSoyadınız=$email=$gsm=$gender=$ders=$not= "";
                     $adınızSoyadınız=security($_POST["adınızSoyadınız"]);
                     $email=security($_POST["email"]);
@@ -84,16 +93,93 @@
                     echo "Notunuz: ".$not."<br>";
 
                     
-                }
+              
                 function security($text){
                     $text=trim($text);
                     $text=stripslashes($text);
                     $text=htmlspecialchars($text);
                     return $text;
+                }   }*/
+
+               
+            
+                if ($_POST) { 
+	
+                    @$adinizsoyadiniz = $_POST['adinizsoyadiniz']; 
+                    @$email  = $_POST['email '];
+                    @$gsm = $_POST['gsm'];
+                    @$gender= $_POST['gender'];
+                    @$ders = $_POST['ders'];
+                    @$not = $_POST['not'];
+                
+                    if ($adinizsoyadiniz<>"" && $email<>"" && $gsm<>"" && $gender<>"" && $ders<>"" && $not<>"") { 
+                        
+                        if ($baglanti->query("INSERT INTO form (adinizsoyadiniz,email,gsm,gender,ders,not) VALUES ('$adinizsoyadiniz','$email','$gsm','$gender','$ders','$not')")) 
+                        {
+                            echo "Veri Eklendi"; 
+                        }
+                        else
+                        {
+                            echo "Hata oluştu";
+                        }
+                
+                    }
+                
                 }
+                
+                ?>
+                </div>
+                <!-- ############################################################## -->
+                
+                
+                <div class="col-md-7">
+                <table class="table">
+                    
+                    <tr>
+                        <th>No</th>
+                        <th>Ad Soyad</th>
+                        <th>Mail</th>
+                        <th>Numara</th>
+                        <th>Cinsiyet</th>
+                        <th>Ders</th>
+                        <th>Mesaj</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                
+                
+                
+                <?php 
+                
+                $sorgu = $baglanti->query("SELECT * FROM form"); 
+                
+                while ($sonuc = $sorgu->fetch_assoc()) { 
+                
+                $id = $sonuc['id']; 
+                $adinizsoyadiniz  = $sonuc['adinizsoyadiniz ']; 
+                    $email = $sonuc['email'];
+                    $gsm = $sonuc['gsm'];
+                    $gender = $sonuc['gender'];
+                    $ders = $sonuc['ders'];
+                    $not = $sonuc['not'];
                 
                 
                 ?>
+                    
+                    <tr>
+                        <td><?php echo $id; ?></td>
+                        <td><?php echo $adinizsoyadiniz ; ?></td>
+                        <td><?php echo $email; ?></td>
+                        <td><?php echo $gsm; ?></td>
+                        <td><?php echo $gender; ?></td>
+                        <td><?php echo $ders; ?></td>
+                        <td><?php echo $not; ?></td>
+                    </tr>
+                
+                <?php }  ?>
+                
+                </table>
+                </div>
                 </div>
             </div>
         </div>
